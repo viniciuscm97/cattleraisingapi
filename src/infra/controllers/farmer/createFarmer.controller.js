@@ -1,9 +1,10 @@
-import { CreateFarmerBodySchema } from "../../../domain/schemas/controllers/farmer.schema";
-import { BadRequestError } from "../../../errors/bad-request.error";
+import FarmerService from "../../../application/services/farmer.service.js";
+import { BadRequestError } from "../../../domain/errors/bad-request.error.js";
+import { CreateFarmerBodySchema } from "../../../domain/schemas/controllers/farmer.schema.js";
 
 export default class CreateFarmerController {
     constructor() {
-        this.farmerService = new FarmerServive();
+        this.farmerService = new FarmerService();
     }
 
     async handle(req, res) {

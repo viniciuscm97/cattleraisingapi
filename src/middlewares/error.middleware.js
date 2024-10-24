@@ -1,7 +1,5 @@
 import { ZodError } from 'zod';
-import { formatZodError } from '../utils/zodErrors';
-
-import { CustomError } from '../errors/custom-app.error';
+import { CustomError } from '../domain/errors/custom-app.error.js';
 
 export const ErrorMiddleware = (
   err,
@@ -18,18 +16,21 @@ export const ErrorMiddleware = (
       message: apiError.message,
       source: apiError.source,
       details: apiError.details,
-      friendlyMessage: apiError.friendlyMessage,
     });
   } else if (err instanceof ZodError) {
-    const zodError = formatZodError(err);
-
     res.status(400).json({
       error: 'ValidationError',
-      details: zodError,
+      details: err.errors,
     });
   } else {
-    console.error('An unexpected error ocurred at: ', err.message);
-    res.status(err.apiError?.code || 500).json(err);
+    const errorMessage = `An unexpected error ocurred at: ${err.message}`;
+    
+    console.error(errorMessage);
+    
+    res.status(err.apiError?.code || 500).json({
+      error: 'InternalServerError',
+      message: errorMessage,
+    });
   }
 
   _next();

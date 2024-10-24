@@ -1,21 +1,23 @@
+import FarmerModel from "../../domain/models/farmer.model.js";
+
 export default class FarmerRepository {
-    constructor() {
-        this.farmerModel = new FarmerModel().execute();
-    }
-    
+    farmerModel = new FarmerModel().execute();
+
     async createFarmer({
         name,
         email,
         farmId,
     }) {
-        return this.farmerModel.create({
+        return (await this.farmerModel).insertOne({
             name,
             email,
-            farmId
+            farmId,
+            createdAt: new Date(),
+            updatedAt: new Date(),
         });
     }
     
     async getFarmerById(farmerId) {
-        return this.farmerModel.findById(farmerId);
+        return (await this.farmerModel).findOne({ _id: farmerId });
     }
 }

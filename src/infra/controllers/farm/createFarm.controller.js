@@ -1,6 +1,6 @@
-import FarmServive from "../../../application/services/farm.service";
-import { CreateFarmBodySchema } from "../../../domain/schemas/controllers/farm.schema";
-import { BadRequestError } from "../../../errors/bad-request.error";
+import FarmServive from "../../../application/services/farm.service.js";
+import { BadRequestError } from "../../../domain/errors/bad-request.error.js";
+import { CreateFarmBodySchema } from "../../../domain/schemas/controllers/farm.schema.js";
 
 export default class CreateFarmController {
     constructor() {
@@ -18,7 +18,7 @@ export default class CreateFarmController {
             )
         }
 
-        await this.farmService.create({...validatedBody.data});
+        await this.farmService.createFarm({...validatedBody.data});
 
         return res.status(201).send({
             message: 'Farmer created successfully',

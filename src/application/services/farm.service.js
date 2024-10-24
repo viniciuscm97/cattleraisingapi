@@ -1,4 +1,4 @@
-import FarmRepository from "../../infra/repositories/farm.repository";
+import FarmRepository from "../../infra/repositories/farm.repository.js";
 
 export default class FarmServive {
     constructor() {
@@ -7,6 +7,7 @@ export default class FarmServive {
 
     async createFarm({
         name,
+        distance,
     }) {
         const farmExists = await this.farmRepository.getFarmName(name);
 
@@ -20,6 +21,7 @@ export default class FarmServive {
 
         return this.farmRepository.createFarm({
             name,
+            distance,
         });
     }
 }

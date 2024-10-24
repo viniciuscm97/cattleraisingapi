@@ -1,10 +1,11 @@
-import { BadRequestError } from "../../errors/bad-request.error";
-import FarmerRepository from "../../infra/repositories/farmer.repository";
+import { BadRequestError } from "../../domain/errors/bad-request.error.js";
+import FarmRepository from "../../infra/repositories/farm.repository.js";
+import FarmerRepository from "../../infra/repositories/farmer.repository.js";
 
-export default class FarmerServive {
+export default class FarmerService {
     constructor() {
         this.farmerRepository = new FarmerRepository();
-        this.farmRepository = farmRepository;
+        this.farmRepository = new FarmRepository();
     }
 
     async createFarmer({

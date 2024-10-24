@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb';
-import { ENV } from '../../enums/system';
+import { ENV } from '../domain/system/env.js';
 
 const connectDataBase = async () => {
 
@@ -18,6 +18,8 @@ const connectDataBase = async () => {
     await client.connect();
 
     const db = client.db(ENV.MONGO_DB_NAME);
+    
+    console.log(`Connected to database: ${ENV.MONGO_DB_NAME}`);
 
     return db;
   } catch (err) {
@@ -26,6 +28,6 @@ const connectDataBase = async () => {
 };
 
 export {
-    connectDataBase
+  connectDataBase
 };
 
