@@ -16,8 +16,12 @@ export default class CreateFarmProductionController {
                 validatedBody.error.errors,
             )
         }
-
-        await this.farmProductionService.createFarmProduction({...validatedBody.data});
+        const { farmId, registerDate, milkVolume } = validatedBody.data;
+        await this.farmProductionService.createFarmProduction({
+            farmId,
+            registerDate,
+            milkVolume,
+        });
 
         return res.status(201).send({
             message: 'Farm production created successfully',

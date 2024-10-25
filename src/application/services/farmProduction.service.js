@@ -30,7 +30,46 @@ export default class FarmProductionService {
         });
     }
 
-    async getFarmProductionById(farmerId) {
-        return this.farmProductionRepository.getFarmProduction(farmerId);
+    async getFarmProductionMonthlyAverage({farmId, month, year}) {
+        const farm = await this.farmRepository.getFarmById(farmId);
+
+        if (!farm) {
+            throw new BadRequestError(
+                'Farm does not exist',
+                'getFarmProductionMonthlyAverage',
+                `FarmId: ${farmId}`,
+            );
+        }
+
+        const farmProductions =  await this.farmProductionRepository.getByFarmAndMonth(farmId, month, year);
+        const monthlyAverage = this.getMonthlyAverage(farmProductions);
+        const dailyVolume = this.getDailyVolume(farmProductions);
+
+        return ({
+            monthlyAverage,
+            dailyVolume,
+        })
+    }
+
+    getDailyVolume(farmProductions) {
+        if (!farmProductions?.length) {
+            return {};
+        }
+
+        return farmProductions.reduce((acc, p) => {
+            acc[p.registerDate.getDate()] = p.milkVolume || 0;
+            return acc;
+        }, {});
+    }
+
+    getMonthlyAverage(farmProductions) {
+        if (!farmProductions?.length) {
+            return 0;
+        }
+
+        const totalVolume = farmProductions.reduce((acc, p) => acc + (p.milkVolume || 0), 0);
+        const monthlyAverage = totalVolume / farmProductions.length;
+
+        return monthlyAverage;
     }
 }

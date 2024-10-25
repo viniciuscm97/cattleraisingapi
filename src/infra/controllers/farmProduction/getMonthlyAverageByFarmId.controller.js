@@ -1,26 +1,45 @@
-import FarmProductionService from "../../../application/services/farmProduction.service";
-import { BadRequestError } from "../../../domain/errors/bad-request.error";
-import { CreateFarmProductionBodySchema } from "../../../domain/schemas/controllers/farmProduction.schema";
-export default class GetMonthlyAverageByFarmId {
+import FarmProductionService from "../../../application/services/farmProduction.service.js";
+import { BadRequestError } from "../../../domain/errors/bad-request.error.js";
+import { GetMonthlyAverageByFarmIdParamsSchema, GetMonthlyAverageByFarmIdQuerySchema } from "../../../domain/schemas/controllers/farmProduction.schema.js";
+export default class GetMonthlyAverageByFarmIdController {
     constructor() {
         this.farmProductionService = new FarmProductionService();
     }
 
     async handle(req, res) {
-        const validatedBody = CreateFarmProductionBodySchema.safeParse(req.body);
+        const validatedQuery = GetMonthlyAverageByFarmIdQuerySchema.safeParse(req.query);
 
-        if (!validatedBody.success) {
+        if (!validatedQuery.success) {
             throw new BadRequestError(
-                'Invalid body',
-                'createFarmProductionController',
-                validatedBody.error.errors,
+                'Invalid Query Params',
+                'getMonthlyAverageByFarmId',
+                validatedQuery.error.errors,
             )
         }
 
-        await this.farmProductionService.createFarmProduction({...validatedBody.data});
+        const validetedParams = GetMonthlyAverageByFarmIdParamsSchema.safeParse(req.params);
 
-        return res.status(201).send({
-            message: 'Farm production created successfully',
+        if (!validetedParams.success) {
+            throw new BadRequestError(
+                'Invalid Params',
+                'getMonthlyAverageByFarmId',
+                validetedParams.error.errors,
+            )
+        }
+
+        const { farmId } = validetedParams.data;
+
+        const { month, year } = validatedQuery.data;
+
+        const { dailyVolume, monthlyAverage } = await this.farmProductionService.getFarmProductionMonthlyAverage({
+            farmId,
+            month,
+            year,
+        });
+
+        return res.status(200).send({
+            dailyVolume,
+            monthlyAverage,
         })
     }   
 }

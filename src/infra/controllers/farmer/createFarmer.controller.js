@@ -18,7 +18,13 @@ export default class CreateFarmerController {
             )
         }
 
-        await this.farmerService.createFarmer({...validatedBody.data});
+        const { name, email, farmId } = validatedBody.data;
+
+        await this.farmerService.createFarmer({
+            name,
+            email,
+            farmId,
+        });
 
         return res.status(201).send({
             message: 'Farmer created successfully',

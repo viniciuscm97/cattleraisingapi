@@ -11,14 +11,24 @@ export default class FarmProductionRepository {
     }) {
         return (await this.farmProductionModel).insertOne({
             farmId,
-            registerDate,
+            registerDate: new Date(registerDate),
             milkVolume,
             createdAt: new Date(),
             updatedAt: new Date(),
         });
     }
     
-    async getFarmProduction(name) {
-        return (await this.farmProductionModel).findOne({ name });
+    async getByFarmAndMonth(farmId, month, year) {
+        const gteDate = new Date(year, month - 1, 1)
+        const ltDate = new Date(year, month, 1)
+
+        return (await this.farmProductionModel).
+            find({
+                farmId,
+                registerDate: {
+                    $gte: gteDate,
+                    $lt: ltDate
+                },
+            }).toArray();
     }
 }

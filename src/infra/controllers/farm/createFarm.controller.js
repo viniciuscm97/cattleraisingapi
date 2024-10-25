@@ -18,7 +18,12 @@ export default class CreateFarmController {
             )
         }
 
-        await this.farmService.createFarm({...validatedBody.data});
+        const { name, distance } = validatedBody.data
+
+        await this.farmService.createFarm({
+            name,
+            distance,
+        });
 
         return res.status(201).send({
             message: 'Farmer created successfully',
