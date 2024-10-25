@@ -13,7 +13,7 @@ const CreateFarmProductionBodySchema = z.object({
     milkVolume: z.number().positive(), 
 });
 
-const GetMonthlyAverageByFarmIdQuerySchema = z.object({
+const GetDailyProductionByMonthQuerySchema = z.object({
     month: z.string()
         .refine((value) => {
             const numberValue = Number(value);
@@ -32,7 +32,7 @@ const GetMonthlyAverageByFarmIdQuerySchema = z.object({
         }),
 });
 
-const GetMonthlyAverageByFarmIdParamsSchema = z.object({
+const GetDailyProductionByMonthParamsSchema = z.object({
     farmId: z.string()
         .refine((value) => ObjectId.isValid(value), {
             message: 'farmId must be a valid ObjectId',
@@ -71,7 +71,7 @@ const GetMilkPriceByMonthParamsSchema = z.object({
         }),
 });
 
-const GetMilkPriceByYearQuerySchema = z.object({
+const GetMonthlyMilkPriceByYearQuerySchema = z.object({
     year: z.string()
         .refine((value) => {
             const numberValue = Number(value);
@@ -82,7 +82,7 @@ const GetMilkPriceByYearQuerySchema = z.object({
         }),
 });
 
-const GetMilkPriceByYearParamsSchema = z.object({
+const GetMonthlyMilkPriceByYearParamsSchema = z.object({
     farmId: z.string()
         .refine((value) => ObjectId.isValid(value), {
             message: 'farmId must be a valid ObjectId',
@@ -93,10 +93,8 @@ const GetMilkPriceByYearParamsSchema = z.object({
 });
 
 export {
-    CreateFarmProductionBodySchema, GetMilkPriceByMonthParamsSchema,
-    GetMilkPriceByMonthQuerySchema,
-    GetMilkPriceByYearParamsSchema,
-    GetMilkPriceByYearQuerySchema, GetMonthlyAverageByFarmIdParamsSchema,
-    GetMonthlyAverageByFarmIdQuerySchema
+    CreateFarmProductionBodySchema, GetDailyProductionByMonthParamsSchema,
+    GetDailyProductionByMonthQuerySchema, GetMilkPriceByMonthParamsSchema,
+    GetMilkPriceByMonthQuerySchema, GetMonthlyMilkPriceByYearParamsSchema, GetMonthlyMilkPriceByYearQuerySchema
 };
 
