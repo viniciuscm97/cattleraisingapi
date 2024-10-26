@@ -20,4 +20,8 @@ export default class FarmerRepository {
     async getFarmerById(farmerId) {
         return (await this.farmerModel).findOne({ _id: farmerId });
     }
+
+    async getFarmerByEmail(email) {
+        return (await this.farmerModel).findOne({ email });
+    }
 }

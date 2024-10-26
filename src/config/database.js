@@ -19,8 +19,6 @@ const connectDataBase = async () => {
 
     const db = client.db(ENV.MONGO_DB_NAME);
     
-    console.log(`Connected to database: ${ENV.MONGO_DB_NAME}`);
-
     return db;
   } catch (err) {
     throw new Error(err.message);

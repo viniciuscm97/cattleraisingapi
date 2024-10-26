@@ -22,6 +22,16 @@ export default class FarmerService {
                 `FarmId: ${farmId}`,
             );
         }
+
+        const farmerExists = await this.farmerRepository.getFarmerByEmail(email);
+
+        if (farmerExists) {
+            throw new BadRequestError(
+                'Farmer already exists',
+                'createFarmerService',
+                `Email: ${email}`,
+            );
+        }
         
         return this.farmerRepository.createFarmer({
             name,

@@ -24,4 +24,8 @@ export default class FarmServive {
             distance,
         });
     }
+
+    async getFarms() {
+        return this.farmRepository.getFarms();
+    }
 }

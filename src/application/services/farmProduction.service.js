@@ -96,6 +96,10 @@ export default class FarmProductionService {
 
         const farmProductions = await this.farmProductionRepository.getByFarmAndMonth(farmId, month, year);
         
+        if (!farmProductions?.length) {
+            return 0;
+        }
+        
         const totalMilkVolume = this.getMilkTotalVolume(farmProductions);
 
         const milkPrice = calculateMilkPrice(totalMilkVolume, farm.distance, month)

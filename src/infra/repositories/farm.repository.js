@@ -26,4 +26,10 @@ export default class FarmRepository {
         return (await this.farmModel).
             findOne({ _id: farmId });
     }
+
+    async getFarms() {
+        return (await this.farmModel).find().sort({
+            createdAt: -1,
+        }).toArray();
+    }
 }
