@@ -3,9 +3,9 @@ import 'dotenv/config';
 import express from 'express';
 import 'express-async-errors';
 import helmet from 'helmet';
-import { connectDataBase } from './config/database';
-import { ErrorMiddleware } from './middlewares/error.middleware';
-import { rateLimiter } from './middlewares/rateLimit.middleware';
+import { connectDataBase } from './config/database.js';
+import { ErrorMiddleware } from './middlewares/error.middleware.js';
+import { rateLimiter } from './middlewares/rateLimit.middleware.js';
 const app = express();
 
 app.use(rateLimiter);

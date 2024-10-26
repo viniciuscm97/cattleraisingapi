@@ -2,7 +2,6 @@ import FarmModel from "../../domain/models/farm.model.js";
 
 const farmModel = new FarmModel();
 
-// const farmCollection = farmModel.execute();
 export default class FarmRepository {
     farmModel = farmModel.execute();
 
