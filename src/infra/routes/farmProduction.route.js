@@ -18,6 +18,8 @@ const farmProductionRouter = Router();
  *     summary: Create a new farm production entry
  *     tags: [FarmProduction]
  *     description: Record daily milk production for a farm
+ *     security:
+ *       - bearerAuth: [] 
  *     requestBody:
  *       required: true
  *       content:
@@ -59,6 +61,8 @@ farmProductionRouter.post('/', createFarmProductionController.handle.bind(create
  *     summary: Get daily milk production by month
  *     tags: [FarmProduction]
  *     description: Retrieve daily milk volume and monthly average for a specific farm
+ *     security:
+ *       - bearerAuth: [] 
  *     parameters:
  *       - in: path
  *         name: farmId
@@ -102,6 +106,8 @@ farmProductionRouter.get('/farm/:farmId/month-production', getMonthlyAverageByFa
  *     summary: Get milk price by month
  *     tags: [FarmProduction]
  *     description: Retrieve milk price in BRL and USD for a specific farm in a specific month
+ *     security:
+ *       - bearerAuth: [] 
  *     parameters:
  *       - in: path
  *         name: farmId
@@ -144,6 +150,8 @@ farmProductionRouter.get('/farm/:farmId/month-price', getMilkPriceByMonthControl
  *     summary: Get monthly milk price by year
  *     tags: [FarmProduction]
  *     description: Retrieve milk prices by month for a specific farm in a specific year
+ *     security:
+ *       - bearerAuth: [] 
  *     parameters:
  *       - in: path
  *         name: farmId

@@ -14,6 +14,8 @@ const farmRouter = Router();
  *     summary: Create a new farm
  *     tags: [Farm]
  *     description: Create a new farm with name and distance
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -54,6 +56,8 @@ farmRouter.post('/', createFarmController.handle.bind(createFarmController));
  *     summary: Get all farms
  *     tags: [Farm]
  *     description: Retrieve a list of all farms
+ *     security:
+ *       - bearerAuth: [] 
  *     responses:
  *       200:
  *         description: A list of farms

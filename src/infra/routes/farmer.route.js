@@ -12,6 +12,8 @@ const farmerRouter = Router();
  *     summary: Create a new farmer
  *     tags: [Farmer]
  *     description: Create a new farmer with name, email, and associated farm ID
+ *     security:
+ *       - bearerAuth: [] 
  *     requestBody:
  *       required: true
  *       content:

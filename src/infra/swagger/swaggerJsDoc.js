@@ -8,6 +8,15 @@ const swaggerOptions = {
             version: "1.0.0",
             description: "API for managing milk production of a dairy farmers",
         },
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: "http",
+                    scheme: "bearer",
+                    bearerFormat: "JWT",
+                }
+            }
+        }
     },
     apis: ["./src/infra/routes/*.js"],
 };
