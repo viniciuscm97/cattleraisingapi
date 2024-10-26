@@ -45,6 +45,11 @@ Antes de executar a aplicação, certifique-se que as seguintes ferramentes est�
 
 [http://localhost:3000](http://localhost:3000)
 
+#### Documentação
+
+- Com o projeto rodando é possivel verificar a documentação da api no swagger:
+  [http://localhost:3000/api-docs](http://localhost:3000/api-docs)
+
 ## 🛠️ Construído com
 
 - [NodeJS](https://nodejs.org/en) - O motor principal para execução do código JavaScript
