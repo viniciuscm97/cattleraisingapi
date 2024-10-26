@@ -11,5 +11,10 @@ indexRouter.use('/farm', authJwtMiddleware, farmRouter);
 indexRouter.use('/farmer', authJwtMiddleware, farmerRouter);
 indexRouter.use('/farm-production', authJwtMiddleware, farmProductionRouter);
 indexRouter.use('/api-user', apiUserRouter);
+
+indexRouter.get('/', (req, res) => {
+    res.send('Hello World!');
+});
+
 export { indexRouter };
 
